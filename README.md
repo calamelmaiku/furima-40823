@@ -2,47 +2,42 @@
 
 ## users テーブル
 
-| Column          | Type    | Options     |
-| --------------- | ------- | ----------- |
-| nickname        | string  | null: false |
-| email           | string  | null: false, unique: true |
-| password        | string  | null: false |
-| last-name       | string  | null: false |
-| first-name      | string  | null: false |
-| last-name-kana  | string  | null: false |
-| first-name-kana | string  | null: false |
-| year            | integer | null: false |
-| month           | integer | null: false |
-| date            | integer | null: false |
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| nickname           | string  | null: false |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false |
+| last_name          | string  | null: false |
+| first_name         | string  | null: false |
+| last_name_kana     | string  | null: false |
+| first_name_kana    | string  | null: false |
+| birth              | date    | null: false |
 
 
 ### Association
 
-- has_many :item_users
-- has_many :items, through: :item_users
+- has_many :items
 - has_many :comments
 - has_many :purchases
 
 ## items テーブル
 
-| Column    | Type    | Options     |
-| --------- | ------- | ----------- |
-| image     | text    | null: false |
-| name      | string  | null: false |
-| text      | text    | null: false |
-| category  | string  | null: false |
-| condition | string  | null: false |
-| charge    | string  | null: false |
-| region    | string  | null: false |
-| span      | string  | null: false |
-| price     | integer | null: false |
+| Column       | Type    | Options     |
+| ------------ | ------- | ----------- |
+| name         | string  | null: false |
+| text         | text    | null: false |
+| category_id  | integer | null: false |
+| condition_id | integer | null: false |
+| delivery_id  | integer | null: false |
+| region_id    | integer | null: false |
+| span_id      | integer | null: false |
+| price        | integer | null: false |
 
 ### Association
 
-- has_many :room_users
-- has_many :users, through: :room_users
+- belongs_to :user
 - has_many :comments
-- has_one :purchases
+- has_one :purchase
 
 ## item-users テーブル
 
