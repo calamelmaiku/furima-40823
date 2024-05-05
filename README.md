@@ -39,32 +39,6 @@
 - has_many :comments
 - has_one :purchase
 
-## item-users テーブル
-
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| user   | references | null: false, foreign_key: true |
-| item   | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :item
-- belongs_to :user
-
-## comments テーブル
-
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| text    | text       | null: false                    |
-| user    | references | null: false, foreign_key: true |
-| item    | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :item
-- belongs_to :user
-
-
 ## receivers テーブル
 
 | Column        | Type       | Options     |
