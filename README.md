@@ -13,11 +13,10 @@
 | first_name_kana    | string  | null: false |
 | birth              | date    | null: false |
 
-
 ### Association
 
 - has_many :items
-- has_many :comments
+- has_one  :address
 - has_many :purchases
 
 ## items テーブル
@@ -36,27 +35,33 @@
 ### Association
 
 - belongs_to :user
-- has_many :comments
-- has_one :purchase
+- has_one    :purchase
+- belongs_to :address
 
-## receivers テーブル
+## addresses テーブル
 
 | Column        | Type       | Options     |
 | ------------- | ---------- | ----------- |
-| card-number   | integer    | null: false, unique: true |
-| expiry        | integer    | null: false |
-| security-code | integer    | null: false |
-| postcode      | integer    | null: false |
+| postcode      | string     | null: false |
 | prefecture    | string     | null: false |
 | city          | string     | null: false |
 | street        | string     | null: false |
 | build         | string     |             |
-| telephone     | integer    | null: false |
-| item_id       | references | null: false |
-| user_id       | references | null: false |
-
-
+| telephone     | string     | null: false |
 
 ### Association
 
+- has_many   :items
+- belongs_to :user
+
+## purchases テーブル
+
+| Column  | Type       | Options     |
+| ------- | ---------- | ----------- |
+| user_id | references | null: false |
+| item_id | references | null: false |
+
+### Association
+
+- belongs_to :user
 - belongs_to :item
