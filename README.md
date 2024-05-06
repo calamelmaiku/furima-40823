@@ -52,7 +52,7 @@
 
 ### Association
 
-- has_many :orders
+- belongs_to :order
 
 ## orders テーブル
 
@@ -65,4 +65,4 @@
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :address
+- has_one :address
