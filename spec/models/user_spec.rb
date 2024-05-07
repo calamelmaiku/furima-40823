@@ -49,6 +49,10 @@ RSpec.describe User, type: :model do
       it 'birthが空では登録できない' do
       end
       it 'passwordとpassword_confirmationが不一致では登録できない' do
+        @user.password = '12q456'
+        @user.password_confirmation = '12q4567'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
       it 'nicknameが7文字以上では登録できない' do
       end
@@ -57,12 +61,28 @@ RSpec.describe User, type: :model do
       it 'emailは@を含まないと登録できない' do
       end
       it 'passwordが5文字以下では登録できない' do
+        @user.password = '12q45'
+        @user.password_confirmation = '12q45'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
       it 'passwordが129文字以上では登録できない' do
+        @user.password =  Faker::Internet.password(min_length: 129, max_length: 150)
+        @user.password_confirmation =  @user.password
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is too long (maximum is 128 characters)')
       end
       it 'passwordが英字のみでは登録できない' do
+        @user.password = 'abcdef'
+        @user.password_confirmation = 'abcdef'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
       end
       it 'passwordが数字のみでは登録できない' do
+        @user.password = '123456'
+        @user.password_confirmation = '123456'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
       end
       it 'last_nameが半角では登録できない' do
       end
