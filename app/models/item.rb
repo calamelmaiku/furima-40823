@@ -10,9 +10,9 @@ class Item < ApplicationRecord
   belongs_to :span
 
   #空の投稿を保存できないようにする
-  validates :name, :string, presence: true
-  validates :comment, :text, presence: true
-  validates :price, :integer, presence: true
+  validates :name, presence: true
+  validates :comment, presence: true
+  validates :price, presence: true
 
   #ジャンルの選択が「---」の時は保存できないようにする
   validates :category_id, numericality: { other_than: 1 }
