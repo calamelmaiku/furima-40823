@@ -3,8 +3,8 @@ window.addEventListener('turbo:load', () => {
   priceInput.addEventListener("input", () => {
     const inputValue = priceInput.value;
     const addTaxDom = document.getElementById("add-tax-price");
-    addTaxDom.innerHTML = inputValue / 10
+    addTaxDom.innerHTML = Math.floor(inputValue / 10)
     const profitDom = document.getElementById("profit");
-    profitDom.innerHTML = inputValue - addTaxDom.innerHTML
+    profitDom.innerHTML = Math.floor(inputValue - addTaxDom.innerHTML)
   })
 });
