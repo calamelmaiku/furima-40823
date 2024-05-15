@@ -3,9 +3,6 @@ class OrdersController < ApplicationController
     @address_order = AddressOrder.new
   end
 
-  def new
-  end
-
   def create
     @address_order = AddressOrder.new(donation_params)
     if @donation_address.valid?
