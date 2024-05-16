@@ -7,7 +7,7 @@ class AddressOrder
     validates :postcode, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :city
     validates :street
-    validates :telephone
+    validates :telephone, numericality: { only_integer: true, greater_than_or_equal_to: 00000000000, less_than_or_equal_to: 99999999999 }
   end
   validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"}
 

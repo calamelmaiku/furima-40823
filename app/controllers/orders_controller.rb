@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:index]
+
   def index
     @address_order = AddressOrder.new
   end
@@ -18,4 +20,5 @@ class OrdersController < ApplicationController
   def address_params
     params.require(:address_order).permit(:postcode, :prefecture_id, :city, :street, :build, :telephone, :order_id).merge(user_id: current_user.id).merge(item_id: params[:item_id])
   end
+
 end
