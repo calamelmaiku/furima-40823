@@ -22,6 +22,26 @@ RSpec.describe AddressOrder, type: :model do
         @address_order.valid?
         expect(@address_order.errors.full_messages).to include("Postcode can't be blank")
       end
+      it 'prefecture_idが空では登録できない' do
+        @address_order.prefecture_id = '0'
+        @address_order.valid?
+        expect(@address_order.errors.full_messages).to include("Prefecture can't be blank")
+      end
+      it 'cityが空では登録できない' do
+        @address_order.city = ''
+        @address_order.valid?
+        expect(@address_order.errors.full_messages).to include("City can't be blank")
+      end
+      it 'streetが空では登録できない' do
+        @address_order.street = ''
+        @address_order.valid?
+        expect(@address_order.errors.full_messages).to include("Street can't be blank")
+      end
+      it 'telephoneが空では登録できない' do
+        @address_order.telephone = ''
+        @address_order.valid?
+        expect(@address_order.errors.full_messages).to include("Telephone can't be blank")
+      end
     end
   end
 end
