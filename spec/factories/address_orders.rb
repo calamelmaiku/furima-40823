@@ -5,6 +5,6 @@ FactoryBot.define do
     city           {Faker::Address.city}
     street         {Faker::Address.street_name}
     build          {Faker::Address.street_address}
-    telephone      {0000000000}
+    telephone      {1111111111}
   end
 end

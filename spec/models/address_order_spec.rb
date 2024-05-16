@@ -42,6 +42,21 @@ RSpec.describe AddressOrder, type: :model do
         @address_order.valid?
         expect(@address_order.errors.full_messages).to include("Telephone can't be blank")
       end
+      it 'postcodeは、ハイフンがないと登録できない' do
+        @address_order.postcode = '0000000'
+        @address_order.valid?
+        expect(@address_order.errors.full_messages).to include("Postcode is invalid. Include hyphen(-)")
+      end
+      it 'telephoneは、10桁未満では登録できない' do
+        @address_order.telephone = '000000000'
+        @address_order.valid?
+        expect(@address_order.errors.full_messages).to include("Telephone is too short (minimum is 10 characters)")
+      end
+      it 'telephoneは、11桁以上では登録できない' do
+        @address_order.telephone = '000000000000'
+        @address_order.valid?
+        expect(@address_order.errors.full_messages).to include("Telephone is too long (maximum is 11 characters)")
+      end
     end
   end
 end
