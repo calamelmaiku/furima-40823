@@ -26,8 +26,8 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-    unless current_user.id != @item.user_id
-      redirect_to controller: 'items', action: 'index'
+    if current_user.id == @item.user_id || Order.exists?(item_id: @item.id)
+      redirect_to root_path
     end
   end
 
