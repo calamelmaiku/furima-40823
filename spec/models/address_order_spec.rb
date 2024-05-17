@@ -8,7 +8,7 @@ RSpec.describe AddressOrder, type: :model do
   end
   describe 'ユーザー新規登録' do
     context '新規登録できるとき' do
-      it "postcodeとprefecture_id、cityとstreet、telephone、orderが存在すれば登録できる" do
+      it "postcodeとprefecture_id、cityとstreet、telephone、order,tokenが存在すれば登録できる" do
         expect(@address_order).to be_valid
       end
       it "buildが空でも登録できる" do
@@ -41,6 +41,11 @@ RSpec.describe AddressOrder, type: :model do
         @address_order.telephone = ''
         @address_order.valid?
         expect(@address_order.errors.full_messages).to include("Telephone can't be blank")
+      end
+      it "tokenが空では登録できない" do
+        @address_order.token = nil
+        @address_order.valid?
+        expect(@address_order.errors.full_messages).to include("Token can't be blank")
       end
       it 'postcodeは、ハイフンがないと登録できない' do
         @address_order.postcode = '0000000'

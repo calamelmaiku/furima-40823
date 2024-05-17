@@ -1,6 +1,6 @@
 class AddressOrder
   include ActiveModel::Model
-  attr_accessor :postcode, :prefecture_id, :city, :street, :build, :telephone, :order_id, :user_id, :item_id
+  attr_accessor :postcode, :prefecture_id, :city, :street, :build, :telephone, :order_id, :user_id, :item_id, :token
 
   with_options presence: true do
 
@@ -8,6 +8,7 @@ class AddressOrder
     validates :city
     validates :street
     validates :telephone, length: { in: 10..11 }, numericality: { only_integer: true }
+    validates :token
   end
   validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"}
 
