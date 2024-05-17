@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index]
-  before_action :get_params_id, only: [:index, :update]
+  before_action :get_params_id, only: [:index, :create]
   before_action :move_to_index, only: [:index]
 
 
