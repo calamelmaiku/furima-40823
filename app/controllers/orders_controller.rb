@@ -13,6 +13,8 @@ class OrdersController < ApplicationController
     @address_order = AddressOrder.new(address_params)
     if @address_order.valid?
       pay_item
+      @address_order.save
+      redirect_to root_path
     else
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
       render :index, status: :unprocessable_entity
@@ -32,7 +34,7 @@ class OrdersController < ApplicationController
   end
 
   def address_params
-    params.require(:address_order).permit(:postcode, :prefecture_id, :city, :street, :build, :telephone, :order_id).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:address_order).permit(:postcode, :prefecture_id, :city, :street, :build, :telephone).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def pay_item
@@ -42,8 +44,6 @@ class OrdersController < ApplicationController
       card: address_params[:token], # カードトークン
       currency: 'jpy' # 通貨の種類（日本円）
     )
-    @address_order.save
-    redirect_to root_path
   end
 
 end
