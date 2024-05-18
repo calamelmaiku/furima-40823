@@ -7,8 +7,10 @@ class AddressOrder
     validates :postcode, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :city
     validates :street
-    validates :telephone, length: { in: 10..11 }, numericality: { only_integer: true }
+    validates :telephone, format: {with: /\A[0-9]{10,11}\z/, message: 'must be 10 or 11 digits'}
     validates :token
+    validates :item_id
+    validates :user_id
   end
   validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"}
 
